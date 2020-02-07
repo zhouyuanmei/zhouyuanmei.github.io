@@ -1260,7 +1260,7 @@ pre .javascript .function {
 }
 .links-of-author a::before,
 .links-of-author span.exturl::before {
-  background: #4663e5;
+  background: #6a01ff;
   border-radius: 50%;
   content: ' ';
   display: inline-block;
@@ -1858,6 +1858,8 @@ pre {
   text-align: center;
   overflow-wrap: break-word;
   word-wrap: break-word;
+  background: rgba(95,161,216,0.2);
+  border-radius: 10px;
 }
 .posts-expand .post-title-link {
   border-bottom: none;
@@ -1993,6 +1995,7 @@ pre {
 .post-tags a {
   display: inline-block;
   font-size: 0.8125em;
+  color: #f00;
 }
 .post-tags a:not(:last-child) {
   margin-right: 10px;

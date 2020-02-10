@@ -42,21 +42,30 @@
     },
     localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
     path: '',
-    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    root: '/',
+    algolia: {
+      applicationID: '606KK78F9M',
+      apiKey: '3a5544e9467b62cccf71d1c104e889a8',
+      indexName: 'blog',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"搜索...","hits_empty":"未发现与 「${query}」相关的内容","hits_stats":"${hits} 条相关条目，使用了 ${time} 毫秒"}
+    }
   };
 </script>
 
-  <meta name="description" content="水平垂直居中方法一（已知元素高度）1234567891011121314151617181920212223&lt;!DOCTYPE html&gt;&lt;html&gt;&lt;head&gt;	&lt;title&gt;&lt;&#x2F;title&gt;	&lt;style&gt;		div&amp;#123;			width:200px;			height:200px;			position:absol">
+  <meta name="description" content="元素水平垂直居中方法一：（未知元素高度），利用绝对定位 + margin:auto实现。1234567891011121314151617181920212223&lt;!DOCTYPE html&gt;&lt;html&gt;&lt;head&gt;	&lt;title&gt;&lt;&#x2F;title&gt;	&lt;style&gt;		div&amp;#123;			width:200px;			hei">
 <meta property="og:type" content="article">
 <meta property="og:title" content="元素居中的几种方式">
 <meta property="og:url" content="http://zhouyuanmei.github.io/2020/02/07/%E5%85%83%E7%B4%A0%E5%B1%85%E4%B8%AD%E7%9A%84%E5%87%A0%E7%A7%8D%E6%96%B9%E5%BC%8F/index.html">
 <meta property="og:site_name" content="MeiMei">
-<meta property="og:description" content="水平垂直居中方法一（已知元素高度）1234567891011121314151617181920212223&lt;!DOCTYPE html&gt;&lt;html&gt;&lt;head&gt;	&lt;title&gt;&lt;&#x2F;title&gt;	&lt;style&gt;		div&amp;#123;			width:200px;			height:200px;			position:absol">
+<meta property="og:description" content="元素水平垂直居中方法一：（未知元素高度），利用绝对定位 + margin:auto实现。1234567891011121314151617181920212223&lt;!DOCTYPE html&gt;&lt;html&gt;&lt;head&gt;	&lt;title&gt;&lt;&#x2F;title&gt;	&lt;style&gt;		div&amp;#123;			width:200px;			hei">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2020-02-07T07:39:38.000Z">
-<meta property="article:modified_time" content="2020-02-07T07:44:25.646Z">
+<meta property="article:modified_time" content="2020-02-08T13:57:36.979Z">
 <meta property="article:author" content="Polly">
-<meta property="article:tag" content="垂直居中、div">
+<meta property="article:tag" content="垂直居中">
+<meta property="article:tag" content="div">
 <meta name="twitter:card" content="summary">
 
 <link rel="canonical" href="http://zhouyuanmei.github.io/2020/02/07/%E5%85%83%E7%B4%A0%E5%B1%85%E4%B8%AD%E7%9A%84%E5%87%A0%E7%A7%8D%E6%96%B9%E5%BC%8F/">
@@ -144,7 +153,12 @@
   </li>
         <li class="menu-item menu-item-tags">
 
-    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签<span class="badge">2</span></a>
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签<span class="badge">3</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类<span class="badge">1</span></a>
 
   </li>
         <li class="menu-item menu-item-about">
@@ -152,35 +166,9 @@
     <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
 
   </li>
-      <li class="menu-item menu-item-search">
-        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
-        </a>
-      </li>
   </ul>
 
 </nav>
-  <div class="site-search">
-    <div class="popup search-popup">
-    <div class="search-header">
-  <span class="search-icon">
-    <i class="fa fa-search"></i>
-  </span>
-  <div class="search-input-container"></div>
-  <span class="popup-btn-close">
-    <i class="fa fa-times-circle"></i>
-  </span>
-</div>
-<div class="algolia-results">
-  <div id="algolia-stats"></div>
-  <div id="algolia-hits"></div>
-  <div id="algolia-pagination" class="algolia-pagination"></div>
-</div>
-
-  
-</div>
-<div class="search-pop-overlay"></div>
-
-  </div>
 </div>
     </header>
 
@@ -229,9 +217,26 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2020-02-07 15:39:38 / 修改时间：15:44:25" itemprop="dateCreated datePublished" datetime="2020-02-07T15:39:38+08:00">2020-02-07</time>
+              <time title="创建时间：2020-02-07 15:39:38" itemprop="dateCreated datePublished" datetime="2020-02-07T15:39:38+08:00">2020-02-07</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-02-08 21:57:36" itemprop="dateModified" datetime="2020-02-08T21:57:36+08:00">2020-02-08</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%85%83%E7%B4%A0%E6%B0%B4%E5%B9%B3%E5%9E%82%E7%9B%B4%E5%B1%85%E4%B8%AD%E5%B8%83%E5%B1%80/" itemprop="url" rel="index">
+                    <span itemprop="name">元素水平垂直居中布局</span>
+                  </a>
+                </span>
             </span>
 
           
@@ -266,7 +271,24 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h3 id="水平垂直居中"><a href="#水平垂直居中" class="headerlink" title="水平垂直居中"></a>水平垂直居中</h3><h2 id="方法一（已知元素高度）"><a href="#方法一（已知元素高度）" class="headerlink" title="方法一（已知元素高度）"></a>方法一（已知元素高度）</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">	&lt;title&gt;&lt;/title&gt;</span><br><span class="line">	&lt;style&gt;</span><br><span class="line">		div&#123;</span><br><span class="line">			width:200px;</span><br><span class="line">			height:200px;</span><br><span class="line">			position:absolute;</span><br><span class="line">			left: 0;</span><br><span class="line">			right: 0;</span><br><span class="line">			top: 0;</span><br><span class="line">			bottom: 0;</span><br><span class="line">			margin: auto;</span><br><span class="line">			background:red;</span><br><span class="line">		&#125;</span><br><span class="line">	&lt;/style&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">	&lt;div&gt;</span><br><span class="line">	&lt;/div&gt;</span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
+        <h3 id="元素水平垂直居中"><a href="#元素水平垂直居中" class="headerlink" title="元素水平垂直居中"></a>元素水平垂直居中</h3><h2 id="方法一：（未知元素高度），利用绝对定位-margin-auto实现。"><a href="#方法一：（未知元素高度），利用绝对定位-margin-auto实现。" class="headerlink" title="方法一：（未知元素高度），利用绝对定位 + margin:auto实现。"></a>方法一：（未知元素高度），利用绝对定位 + margin:auto实现。</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">	&lt;title&gt;&lt;/title&gt;</span><br><span class="line">	&lt;style&gt;</span><br><span class="line">		div&#123;</span><br><span class="line">			width:200px;</span><br><span class="line">			height:200px;</span><br><span class="line">			position:absolute;</span><br><span class="line">			left: 0;</span><br><span class="line">			right: 0;</span><br><span class="line">			top: 0;</span><br><span class="line">			bottom: 0;</span><br><span class="line">			margin: auto;</span><br><span class="line">			background:red;</span><br><span class="line">		&#125;</span><br><span class="line">	&lt;/style&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">	&lt;div&gt;</span><br><span class="line">	&lt;/div&gt;</span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
+<a id="more"></a>
+<h2 id="方法二：（未知元素高度），利用2D变换在水平垂直两个方向平移元素高度的一半。"><a href="#方法二：（未知元素高度），利用2D变换在水平垂直两个方向平移元素高度的一半。" class="headerlink" title="方法二：（未知元素高度），利用2D变换在水平垂直两个方向平移元素高度的一半。"></a>方法二：（未知元素高度），利用2D变换在水平垂直两个方向平移元素高度的一半。</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line"> &lt;title&gt;&lt;/title&gt;</span><br><span class="line"> &lt;style&gt;</span><br><span class="line">	div&#123;</span><br><span class="line">		width:200px;</span><br><span class="line">		height:200px;</span><br><span class="line">		position:absolute;</span><br><span class="line">		background:red;</span><br><span class="line">		top: 50%;</span><br><span class="line">		left: 50%;</span><br><span class="line">		transform: translate(-50%, -50%);</span><br><span class="line">	&#125;</span><br><span class="line"> &lt;/style&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">	&lt;div&gt;</span><br><span class="line">	&lt;/div&gt;</span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
+<h2 id="方法三：（已知元素高度），利用利用绝对定位-margin平移元素整体宽高的一半。"><a href="#方法三：（已知元素高度），利用利用绝对定位-margin平移元素整体宽高的一半。" class="headerlink" title="方法三：（已知元素高度），利用利用绝对定位 + margin平移元素整体宽高的一半。"></a>方法三：（已知元素高度），利用利用绝对定位 + margin平移元素整体宽高的一半。</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line"> &lt;title&gt;&lt;/title&gt;</span><br><span class="line"> &lt;style&gt;</span><br><span class="line">	div&#123;</span><br><span class="line">		width:200px;</span><br><span class="line">		height:200px;</span><br><span class="line">		position:absolute;</span><br><span class="line">		background:red;</span><br><span class="line">		top: 50%;</span><br><span class="line">		margin-top: -100px;</span><br><span class="line">		left: 50%;</span><br><span class="line">		margin-left: -100px;</span><br><span class="line">	&#125;</span><br><span class="line"> &lt;/style&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">	&lt;div&gt;</span><br><span class="line">	&lt;/div&gt;</span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
+<h2 id="方法四：利用弹性盒布局实现水平垂直居中"><a href="#方法四：利用弹性盒布局实现水平垂直居中" class="headerlink" title="方法四：利用弹性盒布局实现水平垂直居中"></a>方法四：利用弹性盒布局实现水平垂直居中</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line"> &lt;title&gt;&lt;/title&gt;</span><br><span class="line"> &lt;style&gt;</span><br><span class="line"> 	<span class="comment">#div1 &#123;</span></span><br><span class="line"> 		width: 500px;</span><br><span class="line"> 		height: 500px;</span><br><span class="line"> 		display: flex;</span><br><span class="line"> 		justify-content: center;</span><br><span class="line"> 		align-items: center;</span><br><span class="line"> 		background: yellow;</span><br><span class="line"> 	&#125;</span><br><span class="line">	<span class="comment">#div2 &#123;</span></span><br><span class="line">		width:200px;</span><br><span class="line">		height:200px;</span><br><span class="line">		background: red;</span><br><span class="line">	&#125;</span><br><span class="line"> &lt;/style&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">	&lt;div id=<span class="string">"div1"</span>&gt;</span><br><span class="line">		&lt;div id=<span class="string">"div2"</span>&gt;</span><br><span class="line">		&lt;/div&gt;</span><br><span class="line">	&lt;/div&gt;</span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
+<h2 id="方法五：利用grid布局-margin-auto实现水平垂直居中"><a href="#方法五：利用grid布局-margin-auto实现水平垂直居中" class="headerlink" title="方法五：利用grid布局 + margin:auto实现水平垂直居中"></a>方法五：利用grid布局 + margin:auto实现水平垂直居中</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line"> &lt;title&gt;&lt;/title&gt;</span><br><span class="line"> &lt;style&gt;</span><br><span class="line"> 	<span class="comment">#div1 &#123;</span></span><br><span class="line"> 		width: 500px;</span><br><span class="line"> 		height: 500px;</span><br><span class="line"> 		display: grid;</span><br><span class="line"> 		background: yellow;</span><br><span class="line"> 	&#125;</span><br><span class="line">	<span class="comment">#div2 &#123;</span></span><br><span class="line">		width:200px;</span><br><span class="line">		height:200px;</span><br><span class="line">		background: red;</span><br><span class="line">		margin: auto;</span><br><span class="line">	&#125;</span><br><span class="line"> &lt;/style&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">	&lt;div id=<span class="string">"div1"</span>&gt;</span><br><span class="line">		&lt;div id=<span class="string">"div2"</span>&gt;</span><br><span class="line">		&lt;/div&gt;</span><br><span class="line">	&lt;/div&gt;</span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
+<h2 id="方法六：利用table-cell布局-vertical-align-middle实现，需要将子块级元素转成行内块元素。"><a href="#方法六：利用table-cell布局-vertical-align-middle实现，需要将子块级元素转成行内块元素。" class="headerlink" title="方法六：利用table-cell布局 + vertical-align: middle实现，需要将子块级元素转成行内块元素。"></a>方法六：利用table-cell布局 + vertical-align: middle实现，需要将子块级元素转成行内块元素。</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line"> &lt;title&gt;&lt;/title&gt;</span><br><span class="line"> &lt;style&gt;</span><br><span class="line"> 	<span class="comment">#div1 &#123;</span></span><br><span class="line"> 		width: 500px;</span><br><span class="line"> 		height: 500px;</span><br><span class="line"> 		display: table-cell;</span><br><span class="line">		vertical-align: middle;</span><br><span class="line">		text-align: center;</span><br><span class="line"> 		background: yellow;</span><br><span class="line"> 	&#125;</span><br><span class="line">	<span class="comment">#div2 &#123;</span></span><br><span class="line">		width:200px;</span><br><span class="line">		height:200px;</span><br><span class="line">		display: inline-block;</span><br><span class="line">		background: red;</span><br><span class="line">	&#125;</span><br><span class="line"> &lt;/style&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">	&lt;div id=<span class="string">"div1"</span>&gt;</span><br><span class="line">		&lt;div id=<span class="string">"div2"</span>&gt;</span><br><span class="line">		&lt;/div&gt;</span><br><span class="line">	&lt;/div&gt;</span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
+<h2 id="方法七：利用inline-block的vertical-align-middle去对齐before伪元素，before伪元素的高度与父对象一样，就实现了高度方向的对齐。"><a href="#方法七：利用inline-block的vertical-align-middle去对齐before伪元素，before伪元素的高度与父对象一样，就实现了高度方向的对齐。" class="headerlink" title="方法七：利用inline-block的vertical-align: middle去对齐before伪元素，before伪元素的高度与父对象一样，就实现了高度方向的对齐。"></a>方法七：利用inline-block的vertical-align: middle去对齐before伪元素，before伪元素的高度与父对象一样，就实现了高度方向的对齐。</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line"> &lt;title&gt;&lt;/title&gt;</span><br><span class="line"> &lt;style&gt;</span><br><span class="line">	<span class="comment">#div1&#123;</span></span><br><span class="line">		width: 500px;</span><br><span class="line">		height: 500px;</span><br><span class="line">		background: yellow;</span><br><span class="line">		text-align: center;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment">#div1:before&#123;</span></span><br><span class="line">		content: <span class="string">""</span>;</span><br><span class="line">		display: inline-block;</span><br><span class="line">		vertical-align: middle;</span><br><span class="line">		height: 100%;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment">#div2&#123;</span></span><br><span class="line">		width: 200px;</span><br><span class="line">		height: 100px;</span><br><span class="line">		background: red;</span><br><span class="line">		display: inline-block;</span><br><span class="line">		vertical-align: middle;</span><br><span class="line">	&#125;</span><br><span class="line"> &lt;/style&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">	&lt;div id=<span class="string">"div1"</span>&gt;</span><br><span class="line">		&lt;div id=<span class="string">"div2"</span>&gt;&lt;/div&gt;</span><br><span class="line">	&lt;/div&gt;</span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
+<h3 id="水平居中"><a href="#水平居中" class="headerlink" title="水平居中"></a>水平居中</h3><h2 id="方法一：text-align-center-可以实现在块级元素内部的内联元素、内联块级元素水平居中"><a href="#方法一：text-align-center-可以实现在块级元素内部的内联元素、内联块级元素水平居中" class="headerlink" title="方法一：text-align:center 可以实现在块级元素内部的内联元素、内联块级元素水平居中"></a>方法一：text-align:center 可以实现在块级元素内部的内联元素、内联块级元素水平居中</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line"> &lt;title&gt;&lt;/title&gt;</span><br><span class="line"> &lt;style&gt;</span><br><span class="line">	<span class="comment">#div1 &#123;</span></span><br><span class="line">		width: 200px;</span><br><span class="line">		height: 200px;</span><br><span class="line">		background: red;</span><br><span class="line">		text-align: center;</span><br><span class="line">	&#125;</span><br><span class="line"> &lt;/style&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">	&lt;div id=<span class="string">"div1"</span>&gt;</span><br><span class="line">		&lt;p&gt;123123&lt;/p&gt;</span><br><span class="line">	&lt;/div&gt;</span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
+<h2 id="方法二：margin-0-auto-块级元素水平居中"><a href="#方法二：margin-0-auto-块级元素水平居中" class="headerlink" title="方法二：margin: 0 auto,块级元素水平居中"></a>方法二：margin: 0 auto,块级元素水平居中</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line"> &lt;title&gt;&lt;/title&gt;</span><br><span class="line"> &lt;style&gt;</span><br><span class="line"> 	div &#123;</span><br><span class="line">		width: 200px;</span><br><span class="line">		height: 200px;</span><br><span class="line">		background: red;</span><br><span class="line">		margin: 0 auto;</span><br><span class="line"> 	&#125;</span><br><span class="line"> &lt;/style&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">	&lt;div&gt;</span><br><span class="line">	&lt;/div&gt;</span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
+<h2 id="方法三：利用inline-block，如果一行中有两个或两个以上的块级元素，通过设置块级元素的显示类型为inline-block和父容器的text-align属性从而使多块级元素水平居中。"><a href="#方法三：利用inline-block，如果一行中有两个或两个以上的块级元素，通过设置块级元素的显示类型为inline-block和父容器的text-align属性从而使多块级元素水平居中。" class="headerlink" title="方法三：利用inline-block，如果一行中有两个或两个以上的块级元素，通过设置块级元素的显示类型为inline-block和父容器的text-align属性从而使多块级元素水平居中。"></a>方法三：利用inline-block，如果一行中有两个或两个以上的块级元素，通过设置块级元素的显示类型为inline-block和父容器的text-align属性从而使多块级元素水平居中。</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line"> &lt;title&gt;&lt;/title&gt;</span><br><span class="line"> &lt;style&gt;</span><br><span class="line"> 	<span class="comment">#div1 &#123;</span></span><br><span class="line">		width: 200px;</span><br><span class="line">		height: 200px;</span><br><span class="line">		background: red;</span><br><span class="line">		text-align: center;</span><br><span class="line"> 	&#125;</span><br><span class="line"> 	<span class="comment">#div2 &#123;</span></span><br><span class="line"> 		width: 50px;</span><br><span class="line"> 		height: 50px;</span><br><span class="line"> 		background: yellow;</span><br><span class="line"> 		display: inline-block;</span><br><span class="line"> 	&#125;</span><br><span class="line"> 	<span class="comment">#div3 &#123;</span></span><br><span class="line"> 		width: 50px;</span><br><span class="line"> 		height: 50px;</span><br><span class="line"> 		background: blue;</span><br><span class="line"> 		display: inline-block;</span><br><span class="line"> 	&#125;</span><br><span class="line"> &lt;/style&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">	&lt;div id=<span class="string">"div1"</span>&gt;</span><br><span class="line">		&lt;div id=<span class="string">"div2"</span>&gt;&lt;/div&gt;&lt;div id=<span class="string">"div3"</span>&gt;&lt;/div&gt;</span><br><span class="line">	&lt;/div&gt;</span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
+<h2 id="方法四：利用弹性布局-flex-，实现水平居中，其中justify-content-用于设置弹性盒子元素在主轴（横轴）方向上的对齐方式，本例中设置子元素水平居中显示。"><a href="#方法四：利用弹性布局-flex-，实现水平居中，其中justify-content-用于设置弹性盒子元素在主轴（横轴）方向上的对齐方式，本例中设置子元素水平居中显示。" class="headerlink" title="方法四：利用弹性布局(flex)，实现水平居中，其中justify-content 用于设置弹性盒子元素在主轴（横轴）方向上的对齐方式，本例中设置子元素水平居中显示。"></a>方法四：利用弹性布局(flex)，实现水平居中，其中justify-content 用于设置弹性盒子元素在主轴（横轴）方向上的对齐方式，本例中设置子元素水平居中显示。</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line"> &lt;title&gt;&lt;/title&gt;</span><br><span class="line"> &lt;style&gt;</span><br><span class="line"> 	<span class="comment">#div1 &#123;</span></span><br><span class="line">		width: 200px;</span><br><span class="line">		height: 200px;</span><br><span class="line">		background: red;</span><br><span class="line">		display: flex;</span><br><span class="line">		justify-content: center;</span><br><span class="line"> 	&#125;</span><br><span class="line"> 	<span class="comment">#div2 &#123;</span></span><br><span class="line"> 		width: 50px;</span><br><span class="line"> 		height: 50px;</span><br><span class="line"> 		background: yellow;</span><br><span class="line"> 	&#125;</span><br><span class="line"> 	<span class="comment">#div3 &#123;</span></span><br><span class="line"> 		width: 50px;</span><br><span class="line"> 		height: 50px;</span><br><span class="line"> 		background: blue;</span><br><span class="line"> 	&#125;</span><br><span class="line"> &lt;/style&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">	&lt;div id=<span class="string">"div1"</span>&gt;</span><br><span class="line">		&lt;div id=<span class="string">"div2"</span>&gt;&lt;/div&gt;&lt;div id=<span class="string">"div3"</span>&gt;&lt;/div&gt;</span><br><span class="line">	&lt;/div&gt;</span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
+<h3 id="垂直居中"><a href="#垂直居中" class="headerlink" title="垂直居中"></a>垂直居中</h3><h2 id="方法一：单行内联元素，设置内联元素的高度和行高相等。"><a href="#方法一：单行内联元素，设置内联元素的高度和行高相等。" class="headerlink" title="方法一：单行内联元素，设置内联元素的高度和行高相等。"></a>方法一：单行内联元素，设置内联元素的高度和行高相等。</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line"> &lt;title&gt;&lt;/title&gt;</span><br><span class="line"> &lt;style&gt;</span><br><span class="line"> 	<span class="comment">#div1 &#123;</span></span><br><span class="line"> 		width: 200px;</span><br><span class="line"> 		height: 200px;</span><br><span class="line"> 		background: red;</span><br><span class="line"> 	&#125;</span><br><span class="line"> 	p &#123;</span><br><span class="line"> 		line-height: 200px;</span><br><span class="line"> 	&#125;</span><br><span class="line"> &lt;/style&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">	&lt;div id=<span class="string">"div1"</span>&gt;</span><br><span class="line">		&lt;p&gt;1231231233&lt;/p&gt;</span><br><span class="line">	&lt;/div&gt;</span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
+<h2 id="方法二：单行内联元素垂直居中，相对定位top-40-相对定位是根据元素的头去定位的，而不是中间，所以少去的10-是元素自身的高度。使用这种方式布局的计算是这样的：（容器高度-元素自身高度）-2。"><a href="#方法二：单行内联元素垂直居中，相对定位top-40-相对定位是根据元素的头去定位的，而不是中间，所以少去的10-是元素自身的高度。使用这种方式布局的计算是这样的：（容器高度-元素自身高度）-2。" class="headerlink" title="方法二：单行内联元素垂直居中，相对定位top:40%,相对定位是根据元素的头去定位的，而不是中间，所以少去的10%是元素自身的高度。使用这种方式布局的计算是这样的：（容器高度-元素自身高度）/2。"></a>方法二：单行内联元素垂直居中，相对定位top:40%,相对定位是根据元素的头去定位的，而不是中间，所以少去的10%是元素自身的高度。使用这种方式布局的计算是这样的：（容器高度-元素自身高度）/2。</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line"> &lt;title&gt;&lt;/title&gt;</span><br><span class="line"> &lt;style&gt;</span><br><span class="line"> 	<span class="comment">#div1 &#123;</span></span><br><span class="line"> 		width: 200px;</span><br><span class="line"> 		height: 200px;</span><br><span class="line"> 		background: red;</span><br><span class="line"> 	&#125;</span><br><span class="line"> 	p &#123;</span><br><span class="line"> 		position: relative;</span><br><span class="line"> 		top: 40%;</span><br><span class="line"> 	&#125;</span><br><span class="line"> &lt;/style&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">	&lt;div id=<span class="string">"div1"</span>&gt;</span><br><span class="line">		&lt;p&gt;1231231233&lt;/p&gt;</span><br><span class="line">	&lt;/div&gt;</span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
+<h2 id="方法三：单行内联元素，绝对定位margin-top-10-5px-先设置父元素相对定位属性position-relative哦。"><a href="#方法三：单行内联元素，绝对定位margin-top-10-5px-先设置父元素相对定位属性position-relative哦。" class="headerlink" title="方法三：单行内联元素，绝对定位margin-top:-10.5px,先设置父元素相对定位属性position: relative哦。"></a>方法三：单行内联元素，绝对定位margin-top:-10.5px,先设置父元素相对定位属性position: relative哦。</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line"> &lt;title&gt;&lt;/title&gt;</span><br><span class="line"> &lt;style&gt;</span><br><span class="line"> 	<span class="comment">#div1 &#123;</span></span><br><span class="line"> 		width: 200px;</span><br><span class="line"> 		height: 200px;</span><br><span class="line"> 		background: red;</span><br><span class="line"> 		position: relative;</span><br><span class="line"> 	&#125;</span><br><span class="line"> 	p &#123;</span><br><span class="line"> 		position: absolute;</span><br><span class="line"> 		top: 50%;</span><br><span class="line"> 		margin-top: -10.5px;</span><br><span class="line"> 	&#125;</span><br><span class="line"> &lt;/style&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">	&lt;div id=<span class="string">"div1"</span>&gt;</span><br><span class="line">		&lt;p&gt;1231231233&lt;/p&gt;</span><br><span class="line">	&lt;/div&gt;</span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
+<h2 id="方法四：绝对定位-top-0-left-0-bottom-0-right-0-margin-auto-0。需要给内联元素设置高度"><a href="#方法四：绝对定位-top-0-left-0-bottom-0-right-0-margin-auto-0。需要给内联元素设置高度" class="headerlink" title="方法四：绝对定位 top:0,left:0,bottom:0,right:0;margin:auto 0。需要给内联元素设置高度"></a>方法四：绝对定位 top:0,left:0,bottom:0,right:0;margin:auto 0。需要给内联元素设置高度</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line"> &lt;title&gt;&lt;/title&gt;</span><br><span class="line"> &lt;style&gt;</span><br><span class="line"> 	<span class="comment">#div1 &#123;</span></span><br><span class="line"> 		width: 200px;</span><br><span class="line"> 		height: 200px;</span><br><span class="line"> 		background: red;</span><br><span class="line"> 		position: relative;</span><br><span class="line"> 	&#125;</span><br><span class="line"> 	p &#123;</span><br><span class="line"> 		height: 21px;</span><br><span class="line"> 		position: absolute;</span><br><span class="line"> 		top: 0px;</span><br><span class="line"> 		left: 0px;</span><br><span class="line"> 		bottom: 0px;</span><br><span class="line"> 		right: 0px;</span><br><span class="line"> 		margin: auto 0;</span><br><span class="line"> 	&#125;</span><br><span class="line"> &lt;/style&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">	&lt;div id=<span class="string">"div1"</span>&gt;</span><br><span class="line">		&lt;p&gt;1231231233&lt;/p&gt;</span><br><span class="line">	&lt;/div&gt;</span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
+<h2 id="方法五：利用table-cell。"><a href="#方法五：利用table-cell。" class="headerlink" title="方法五：利用table-cell。"></a>方法五：利用table-cell。</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line"> &lt;title&gt;&lt;/title&gt;</span><br><span class="line"> &lt;style&gt;</span><br><span class="line"> 	<span class="comment">#div1 &#123;</span></span><br><span class="line"> 		width: 200px;</span><br><span class="line"> 		height: 200px;</span><br><span class="line"> 		background: red;</span><br><span class="line"> 		display: table-cell;</span><br><span class="line"> 		vertical-align: middle;</span><br><span class="line"> 	&#125;</span><br><span class="line"> &lt;/style&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">	&lt;div id=<span class="string">"div1"</span>&gt;</span><br><span class="line">		&lt;p&gt;1231231233&lt;/p&gt;</span><br><span class="line">	&lt;/div&gt;</span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
+<h2 id="方法六：利用弹性盒flex布局"><a href="#方法六：利用弹性盒flex布局" class="headerlink" title="方法六：利用弹性盒flex布局"></a>方法六：利用弹性盒flex布局</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line"> &lt;title&gt;&lt;/title&gt;</span><br><span class="line"> &lt;style&gt;</span><br><span class="line"> 	<span class="comment">#div1 &#123;</span></span><br><span class="line"> 		width: 200px;</span><br><span class="line"> 		height: 200px;</span><br><span class="line"> 		background: red;</span><br><span class="line"> 		display: flex;</span><br><span class="line"> 		align-items: center;</span><br><span class="line"> 	&#125;</span><br><span class="line"> &lt;/style&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">	&lt;div id=<span class="string">"div1"</span>&gt;</span><br><span class="line">		&lt;p&gt;1231231233&lt;/p&gt;</span><br><span class="line">	&lt;/div&gt;</span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
     </div>
 
     
@@ -277,7 +299,7 @@
   
     <div>
     
-        <div style="text-align:center;color: #ccc;font-size:14px;">----------------本文结束<i class="fa fa-heart"></i>感谢阅读----------------</div>
+        <div style="text-align:center;color: #777;font-size:14px;">----------------本文结束<i class="fa fa-heart"></i>感谢阅读----------------</div>
     
 </div>
 
@@ -296,7 +318,7 @@
   <p><span>本文标题:</span><a href="/2020/02/07/%E5%85%83%E7%B4%A0%E5%B1%85%E4%B8%AD%E7%9A%84%E5%87%A0%E7%A7%8D%E6%96%B9%E5%BC%8F/">元素居中的几种方式</a></p>
   <p><span>文章作者:</span><a href="/" title="访问 Polly 的个人博客">Polly</a></p>
   <p><span>发布时间:</span>2020年02月07日 - 15:02</p>
-  <p><span>最后更新:</span>2020年02月07日 - 15:02</p>
+  <p><span>最后更新:</span>2020年02月08日 - 21:02</p>
   <p><span>原始链接:</span><a href="/2020/02/07/%E5%85%83%E7%B4%A0%E5%B1%85%E4%B8%AD%E7%9A%84%E5%87%A0%E7%A7%8D%E6%96%B9%E5%BC%8F/" title="元素居中的几种方式">http://zhouyuanmei.github.io/2020/02/07/%E5%85%83%E7%B4%A0%E5%B1%85%E4%B8%AD%E7%9A%84%E5%87%A0%E7%A7%8D%E6%96%B9%E5%BC%8F/</a>
     <span class="copy-path"  title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="http://zhouyuanmei.github.io/2020/02/07/%E5%85%83%E7%B4%A0%E5%B1%85%E4%B8%AD%E7%9A%84%E5%87%A0%E7%A7%8D%E6%96%B9%E5%BC%8F/"  aria-label="复制成功！"></i></span>
   </p>
@@ -336,7 +358,8 @@
 
       <footer class="post-footer">
           <div class="post-tags">
-              <a href="/tags/%E5%9E%82%E7%9B%B4%E5%B1%85%E4%B8%AD%E3%80%81div/" rel="tag"><i class="fa fa-tag"></i># 垂直居中、div</a>
+              <a href="/tags/%E5%9E%82%E7%9B%B4%E5%B1%85%E4%B8%AD/" rel="tag"><i class="fa fa-tag"></i>垂直居中</a>
+              <a href="/tags/div/" rel="tag"><i class="fa fa-tag"></i>div</a>
           </div>
 
         
@@ -409,6 +432,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#元素水平垂直居中"><span class="nav-number">1.</span> <span class="nav-text">元素水平垂直居中</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#方法一：（未知元素高度），利用绝对定位-margin-auto实现。"><span class="nav-number"></span> <span class="nav-text">方法一：（未知元素高度），利用绝对定位 + margin:auto实现。</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#方法二：（未知元素高度），利用2D变换在水平垂直两个方向平移元素高度的一半。"><span class="nav-number"></span> <span class="nav-text">方法二：（未知元素高度），利用2D变换在水平垂直两个方向平移元素高度的一半。</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#方法三：（已知元素高度），利用利用绝对定位-margin平移元素整体宽高的一半。"><span class="nav-number"></span> <span class="nav-text">方法三：（已知元素高度），利用利用绝对定位 + margin平移元素整体宽高的一半。</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#方法四：利用弹性盒布局实现水平垂直居中"><span class="nav-number"></span> <span class="nav-text">方法四：利用弹性盒布局实现水平垂直居中</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#方法五：利用grid布局-margin-auto实现水平垂直居中"><span class="nav-number"></span> <span class="nav-text">方法五：利用grid布局 + margin:auto实现水平垂直居中</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#方法六：利用table-cell布局-vertical-align-middle实现，需要将子块级元素转成行内块元素。"><span class="nav-number"></span> <span class="nav-text">方法六：利用table-cell布局 + vertical-align: middle实现，需要将子块级元素转成行内块元素。</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#方法七：利用inline-block的vertical-align-middle去对齐before伪元素，before伪元素的高度与父对象一样，就实现了高度方向的对齐。"><span class="nav-number"></span> <span class="nav-text">方法七：利用inline-block的vertical-align: middle去对齐before伪元素，before伪元素的高度与父对象一样，就实现了高度方向的对齐。</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#水平居中"><span class="nav-number">1.</span> <span class="nav-text">水平居中</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#方法一：text-align-center-可以实现在块级元素内部的内联元素、内联块级元素水平居中"><span class="nav-number"></span> <span class="nav-text">方法一：text-align:center 可以实现在块级元素内部的内联元素、内联块级元素水平居中</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#方法二：margin-0-auto-块级元素水平居中"><span class="nav-number"></span> <span class="nav-text">方法二：margin: 0 auto,块级元素水平居中</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#方法三：利用inline-block，如果一行中有两个或两个以上的块级元素，通过设置块级元素的显示类型为inline-block和父容器的text-align属性从而使多块级元素水平居中。"><span class="nav-number"></span> <span class="nav-text">方法三：利用inline-block，如果一行中有两个或两个以上的块级元素，通过设置块级元素的显示类型为inline-block和父容器的text-align属性从而使多块级元素水平居中。</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#方法四：利用弹性布局-flex-，实现水平居中，其中justify-content-用于设置弹性盒子元素在主轴（横轴）方向上的对齐方式，本例中设置子元素水平居中显示。"><span class="nav-number"></span> <span class="nav-text">方法四：利用弹性布局(flex)，实现水平居中，其中justify-content 用于设置弹性盒子元素在主轴（横轴）方向上的对齐方式，本例中设置子元素水平居中显示。</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#垂直居中"><span class="nav-number">1.</span> <span class="nav-text">垂直居中</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#方法一：单行内联元素，设置内联元素的高度和行高相等。"><span class="nav-number"></span> <span class="nav-text">方法一：单行内联元素，设置内联元素的高度和行高相等。</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#方法二：单行内联元素垂直居中，相对定位top-40-相对定位是根据元素的头去定位的，而不是中间，所以少去的10-是元素自身的高度。使用这种方式布局的计算是这样的：（容器高度-元素自身高度）-2。"><span class="nav-number"></span> <span class="nav-text">方法二：单行内联元素垂直居中，相对定位top:40%,相对定位是根据元素的头去定位的，而不是中间，所以少去的10%是元素自身的高度。使用这种方式布局的计算是这样的：（容器高度-元素自身高度）&#x2F;2。</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#方法三：单行内联元素，绝对定位margin-top-10-5px-先设置父元素相对定位属性position-relative哦。"><span class="nav-number"></span> <span class="nav-text">方法三：单行内联元素，绝对定位margin-top:-10.5px,先设置父元素相对定位属性position: relative哦。</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#方法四：绝对定位-top-0-left-0-bottom-0-right-0-margin-auto-0。需要给内联元素设置高度"><span class="nav-number"></span> <span class="nav-text">方法四：绝对定位 top:0,left:0,bottom:0,right:0;margin:auto 0。需要给内联元素设置高度</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#方法五：利用table-cell。"><span class="nav-number"></span> <span class="nav-text">方法五：利用table-cell。</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#方法六：利用弹性盒flex布局"><span class="nav-number"></span> <span class="nav-text">方法六：利用弹性盒flex布局</span></a></div>
       </div>
       <!--/noindex-->
 
@@ -427,10 +451,16 @@
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">1</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-count">3</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -455,7 +485,7 @@
         <div class="widget-wrap">
             <div id="myCanvasContainer" class="widget tagcloud">
                 <canvas width="250" height="250" id="resCanvas" style="width=100%">
-                    <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/hello-world/" rel="tag">hello world</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%9E%82%E7%9B%B4%E5%B1%85%E4%B8%AD%E3%80%81div/" rel="tag">垂直居中、div</a><span class="tag-list-count">1</span></li></ul>
+                    <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/div/" rel="tag">div</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hello-world/" rel="tag">hello world</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%9E%82%E7%9B%B4%E5%B1%85%E4%B8%AD/" rel="tag">垂直居中</a><span class="tag-list-count">1</span></li></ul>
                 </canvas>
             </div>
         </div>
@@ -475,7 +505,7 @@
 <div class="copyright">
   
   &copy; 
-  <span itemprop="copyrightYear">2020-02-07</span>
+  <span itemprop="copyrightYear">2020-02-10</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
@@ -503,12 +533,12 @@ setInterval("createtime()",250);
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共150字</span>
+  <span class="post-count">博客全站共1.8k字</span>
 </div>
 
         
 <div class="busuanzi-count">
-  <script pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
     <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
       <span class="post-meta-item-icon">
         <i class="fa fa-user"></i>
@@ -543,7 +573,6 @@ setInterval("createtime()",250);
   
   <script color='95,161,216' opacity='1' zIndex='-1' count='1' src="/lib/canvas-nest/canvas-nest.min.js"></script>
   <script src="/lib/anime.min.js"></script>
-  <script src="/lib/pjax/pjax.min.js"></script>
   <script src="//cdn.jsdelivr.net/npm/lozad@1/dist/lozad.min.js"></script>
   <script src="//cdn.jsdelivr.net/npm/pangu@4/dist/browser/pangu.min.js"></script>
   <script src="/lib/velocity/velocity.min.js"></script>
@@ -559,64 +588,6 @@ setInterval("createtime()",250);
 
 <script src="/js/next-boot.js"></script>
 
-  <script>
-var pjax = new Pjax({
-  selectors: [
-    'head title',
-    '#page-configurations',
-    '.content-wrap',
-    '.post-toc-wrap',
-    '#pjax'
-  ],
-  switches: {
-    '.post-toc-wrap': Pjax.switches.innerHTML
-  },
-  analytics: false,
-  cacheBust: false,
-  scrollTo : !CONFIG.bookmark.enable
-});
-
-window.addEventListener('pjax:success', () => {
-  document.querySelectorAll('script[pjax], script#page-configurations, #pjax script').forEach(element => {
-    var code = element.text || element.textContent || element.innerHTML || '';
-    var parent = element.parentNode;
-    parent.removeChild(element);
-    var script = document.createElement('script');
-    if (element.id) {
-      script.id = element.id;
-    }
-    if (element.className) {
-      script.className = element.className;
-    }
-    if (element.type) {
-      script.type = element.type;
-    }
-    if (element.src) {
-      script.src = element.src;
-      // Force synchronous loading of peripheral JS.
-      script.async = false;
-    }
-    if (element.getAttribute('pjax') !== null) {
-      script.setAttribute('pjax', '');
-    }
-    if (code !== '') {
-      script.appendChild(document.createTextNode(code));
-    }
-    parent.appendChild(script);
-  });
-  NexT.boot.refresh();
-  // Define Motion Sequence & Bootstrap Motion.
-  if (CONFIG.motion.enable) {
-    NexT.motion.integrator
-      .init()
-      .add(NexT.motion.middleWares.subMenu)
-      .add(NexT.motion.middleWares.postList)
-      .bootstrap();
-  }
-  NexT.utils.updateSidebarPosition();
-});
-</script>
-
 
 
 
@@ -625,10 +596,6 @@ window.addEventListener('pjax:success', () => {
 
 
 
-  
-<script src="//cdn.jsdelivr.net/npm/algoliasearch@4/dist/algoliasearch-lite.umd.js"></script>
-<script src="//cdn.jsdelivr.net/npm/instantsearch.js@4/dist/instantsearch.production.min.js"></script>
-<script src="/js/algolia-search.js"></script>
 
 
 
@@ -640,10 +607,6 @@ window.addEventListener('pjax:success', () => {
 
 
 
-
-
-
-    <div id="pjax">
   
 
   
@@ -679,7 +642,6 @@ NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
 });
 </script>
 
-    </div>
 
   
 <script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js">
